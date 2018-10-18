@@ -1,9 +1,6 @@
 package com.example.beachvolleyapp;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class TeamInTournament {
@@ -11,8 +8,14 @@ public class TeamInTournament {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
-    private Tournament tournamentId;
-    private Team teamId;
+
+    @ManyToOne
+    @JoinColumn(name = "tournament_id")
+    private Tournament tournament;
+
+    @ManyToOne
+    @JoinColumn(name = "team_id")
+    private Team team;
 
     public TeamInTournament() {
     }
@@ -25,19 +28,19 @@ public class TeamInTournament {
         this.id = id;
     }
 
-    public Tournament getTournamentId() {
-        return tournamentId;
+    public Tournament getTournament() {
+        return tournament;
     }
 
-    public void setTournamentId(Tournament tournamentId) {
-        this.tournamentId = tournamentId;
+    public void setTournament(Tournament tournament) {
+        this.tournament = tournament;
     }
 
-    public Team getTeamId() {
-        return teamId;
+    public Team getTeam() {
+        return team;
     }
 
-    public void setTeamId(Team teamId) {
-        this.teamId = teamId;
+    public void setTeam(Team team) {
+        this.team = team;
     }
 }

@@ -1,10 +1,8 @@
 package com.example.beachvolleyapp;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 public class Location implements Serializable {
@@ -16,7 +14,18 @@ public class Location implements Serializable {
     private int number;
     private String city;
 
+    @OneToMany(mappedBy = "location")
+    List<Tournament> tournaments;
+
     public Location() {
+    }
+
+    public List<Tournament> getTournaments() {
+        return tournaments;
+    }
+
+    public void setTournaments(List<Tournament> tournaments) {
+        this.tournaments = tournaments;
     }
 
     public Long getId() {

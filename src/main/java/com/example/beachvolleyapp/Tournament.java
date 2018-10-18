@@ -3,13 +3,11 @@ package com.example.beachvolleyapp;
 import javafx.scene.chart.PieChart;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 @Entity
 public class Tournament implements Serializable {
@@ -20,13 +18,49 @@ public class Tournament implements Serializable {
     private String name;
     private LocalDate date;
     private LocalTime time;
-    private Location locationId;
     private String category;
     private int sitesNumber;
     private int fee;
 
+    /*
+    @ManyToOne
+    @JoinColumn(name = "organizer_id")
+    private Organizer organizer;
+    */
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "location_id")
+    private Location location;
+
+    @OneToMany(mappedBy = "tournament" )
+    List<Score> scores;
+
+    @OneToMany(mappedBy = "tournament")
+    List<TeamInTournament> teamInTournaments;
+
+
     public Tournament() {
     }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+//    public Organizer getOrganizer() {
+//        return organizer;
+//    }
+//
+//    public void setOrganizer(Organizer organizer) {
+//        this.organizer = organizer;
+//    }
 
     public Long getId() {
         return id;
@@ -60,13 +94,6 @@ public class Tournament implements Serializable {
         this.time = time;
     }
 
-    public Location getLocation_id() {
-        return locationId;
-    }
-
-    public void setLocation_id(Location location_id) {
-        this.locationId = locationId;
-    }
 
     public String getCategory() {
         return category;
@@ -90,5 +117,29 @@ public class Tournament implements Serializable {
 
     public void setFee(int fee) {
         this.fee = fee;
+    }
+
+    public List<Score> getScores() {
+        return scores;
+    }
+
+    public void setScores(List<Score> scores) {
+        this.scores = scores;
+    }
+
+    public List<TeamInTournament> getTeamInTournaments() {
+        return teamInTournaments;
+    }
+
+    public void setTeamInTournaments(List<TeamInTournament> teamInTournaments) {
+        this.teamInTournaments = teamInTournaments;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

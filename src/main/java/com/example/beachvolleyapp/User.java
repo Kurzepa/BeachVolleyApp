@@ -1,10 +1,8 @@
 package com.example.beachvolleyapp;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 public class User implements Serializable {
@@ -18,6 +16,15 @@ public class User implements Serializable {
     private String surname;
     private String age;
     private String gender;
+
+//    @OneToMany(mappedBy = "user" )
+//    private List<Organizer> organizers;
+
+    @OneToMany(mappedBy = "user" )
+    private List<Tournament> tournaments;
+
+    @ManyToMany(mappedBy = "users")
+    private List<Team> teams;
 
 
     public User() {
@@ -77,5 +84,29 @@ public class User implements Serializable {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+//    public List<Organizer> getOrganizers() {
+//        return organizers;
+//    }
+//
+//    public void setOrganizers(List<Organizer> organizers) {
+//        this.organizers = organizers;
+//    }
+
+    public List<Team> getTeams() {
+        return teams;
+    }
+
+    public void setTeams(List<Team> teams) {
+        this.teams = teams;
+    }
+
+    public List<Tournament> getTournaments() {
+        return tournaments;
+    }
+
+    public void setTournaments(List<Tournament> tournaments) {
+        this.tournaments = tournaments;
     }
 }

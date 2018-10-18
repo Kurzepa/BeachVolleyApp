@@ -1,10 +1,8 @@
 package com.example.beachvolleyapp;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 public class Team implements Serializable {
@@ -13,8 +11,15 @@ public class Team implements Serializable {
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private User userId1;
-    private User userId2;
+
+    @OneToMany(mappedBy = "team" )
+    List<Score> scores;
+
+    @OneToMany(mappedBy = "team")
+    List<TeamInTournament> teamInTournaments;
+
+    @ManyToMany
+    private List<User> users;
 
     public Team() {
     }
@@ -35,19 +40,27 @@ public class Team implements Serializable {
         this.name = name;
     }
 
-    public User getUserId1() {
-        return userId1;
+    public List<Score> getScores() {
+        return scores;
     }
 
-    public void setUserId1(User userId1) {
-        this.userId1 = userId1;
+    public void setScores(List<Score> scores) {
+        this.scores = scores;
     }
 
-    public User getUserId2() {
-        return userId2;
+    public List<TeamInTournament> getTeamInTournaments() {
+        return teamInTournaments;
     }
 
-    public void setUserId2(User userId2) {
-        this.userId2 = userId2;
+    public void setTeamInTournaments(List<TeamInTournament> teamInTournaments) {
+        this.teamInTournaments = teamInTournaments;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 }

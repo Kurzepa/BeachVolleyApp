@@ -1,9 +1,6 @@
 package com.example.beachvolleyapp;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
@@ -12,9 +9,16 @@ public class Score implements Serializable {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
-    private Team teamId;
     private int place;
     private int points;
+
+    @ManyToOne
+    @JoinColumn(name = "tournament_id")
+    private Tournament tournament;
+
+    @ManyToOne
+    @JoinColumn(name = "team_id")
+    private Team team;
 
     public Score() {
     }
@@ -27,13 +31,6 @@ public class Score implements Serializable {
         this.id = id;
     }
 
-    public Team getTeam_id() {
-        return teamId;
-    }
-
-    public void setTeam_id(Team team_id) {
-        this.teamId = teamId;
-    }
 
     public int getPlace() {
         return place;
@@ -49,5 +46,21 @@ public class Score implements Serializable {
 
     public void setPoints(int points) {
         this.points = points;
+    }
+
+    public Tournament getTournament() {
+        return tournament;
+    }
+
+    public void setTournament(Tournament tournament) {
+        this.tournament = tournament;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
     }
 }

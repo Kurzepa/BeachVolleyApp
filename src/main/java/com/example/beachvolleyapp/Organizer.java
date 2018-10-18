@@ -1,44 +1,47 @@
-package com.example.beachvolleyapp;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.io.Serializable;
-
-@Entity
-public class Organizer implements Serializable {
-
-    @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private Long id;
-    private User userId;
-    private Tournament tournamentId;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public User getUser_id() {
-        return userId;
-    }
-
-    public void setUser_id(User user_id) {
-        this.userId = userId;
-    }
-
-    public Tournament getTournament_id() {
-        return tournamentId;
-    }
-
-    public void setTournament_id(Tournament tournament_id) {
-        this.tournamentId = tournamentId;
-    }
-
-    public Organizer() {
-    }
-}
+//package com.example.beachvolleyapp;
+//
+//import javax.persistence.*;
+//import java.io.Serializable;
+//import java.util.List;
+//
+//@Entity
+//public class Organizer implements Serializable {
+//
+//    @Id
+//    @GeneratedValue (strategy = GenerationType.IDENTITY)
+//    private Long id;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "user_id")
+//    private User user;
+//
+//    @OneToMany(mappedBy = "organizer")
+//    private List<Tournament> tournaments;
+//
+//    public Organizer() {
+//    }
+//
+//    public Long getId() {
+//        return id;
+//    }
+//
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
+//
+//    public User getUser() {
+//        return user;
+//    }
+//
+//    public void setUser(User user) {
+//        this.user = user;
+//    }
+//
+//    public List<Tournament> getTournaments() {
+//        return tournaments;
+//    }
+//
+//    public void setTournaments(List<Tournament> tournaments) {
+//        this.tournaments = tournaments;
+//    }
+//}

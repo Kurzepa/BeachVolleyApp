@@ -43,6 +43,15 @@ public class Tournament implements Serializable {
     public Tournament() {
     }
 
+    public Tournament(String name, String category, int sitesNumber, int fee) {
+        this.name = name;
+        //this.date = date;
+        //this.time = time;
+        this.category = category;
+        this.sitesNumber = sitesNumber;
+        this.fee = fee;
+    }
+
     public Location getLocation() {
         return location;
     }

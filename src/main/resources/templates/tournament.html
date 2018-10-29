@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html xmlns:th = "http://www.thymeleaf.org">
+<head>
+    <title>Spring CMS</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <td>Nazwa turnieju</td><td>Liczba par</td>
+    </tr>
+    </thead>
+<tbody th:each="tournament : ${tournament}">
+<tr>
+    <td th:text="${tournament.name}"></td>
+    <td th:text="${tournament.sitesNumber}"></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

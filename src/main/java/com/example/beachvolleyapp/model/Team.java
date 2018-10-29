@@ -1,4 +1,4 @@
-package com.example.beachvolleyapp;
+package com.example.beachvolleyapp.model;
 
 import javax.persistence.*;
 import java.io.Serializable;

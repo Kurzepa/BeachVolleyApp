@@ -1,4 +1,7 @@
-package com.example.beachvolleyapp;
+package com.example.beachvolleyapp.model;
+
+import com.example.beachvolleyapp.model.Team;
+import com.example.beachvolleyapp.model.Tournament;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -14,11 +17,9 @@ public class User implements Serializable {
     private String password;
     private String name;
     private String surname;
-    private String age;
+    private int age;
     private String gender;
 
-//    @OneToMany(mappedBy = "user" )
-//    private List<Organizer> organizers;
 
     @OneToMany(mappedBy = "user" )
     private List<Tournament> tournaments;
@@ -28,6 +29,15 @@ public class User implements Serializable {
 
 
     public User() {
+    }
+
+    public User(String login, String password, String name, String surname, int age, String gender) {
+        this.login = login;
+        this.password = password;
+        this.name = name;
+        this.surname = surname;
+        this.age = age;
+        this.gender = gender;
     }
 
     public Long getId() {
@@ -70,11 +80,11 @@ public class User implements Serializable {
         this.surname = surname;
     }
 
-    public String getAge() {
+    public int getAge() {
         return age;
     }
 
-    public void setAge(String age) {
+    public void setAge(int age) {
         this.age = age;
     }
 

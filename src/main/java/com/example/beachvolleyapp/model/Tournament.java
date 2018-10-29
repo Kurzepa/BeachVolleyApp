@@ -1,7 +1,4 @@
-package com.example.beachvolleyapp;
-
-import javafx.scene.chart.PieChart;
-import org.springframework.format.annotation.DateTimeFormat;
+package com.example.beachvolleyapp.model;
 
 import javax.persistence.*;
 import java.io.Serializable;

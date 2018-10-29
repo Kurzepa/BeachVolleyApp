@@ -1,16 +1,13 @@
-package com.example.beachvolleyapp;
+package com.example.beachvolleyapp.model;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
-public class Score implements Serializable {
+public class TeamInTournament {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
-    private int place;
-    private int points;
 
     @ManyToOne
     @JoinColumn(name = "tournament_id")
@@ -20,7 +17,7 @@ public class Score implements Serializable {
     @JoinColumn(name = "team_id")
     private Team team;
 
-    public Score() {
+    public TeamInTournament() {
     }
 
     public Long getId() {
@@ -29,23 +26,6 @@ public class Score implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-
-    public int getPlace() {
-        return place;
-    }
-
-    public void setPlace(int place) {
-        this.place = place;
-    }
-
-    public int getPoints() {
-        return points;
-    }
-
-    public void setPoints(int points) {
-        this.points = points;
     }
 
     public Tournament getTournament() {

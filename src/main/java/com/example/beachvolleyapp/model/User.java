@@ -19,6 +19,7 @@ public class User implements Serializable {
     private String surname;
     private int age;
     private String gender;
+    private String email;
 
 
     @OneToMany(mappedBy = "user" )
@@ -96,7 +97,14 @@ public class User implements Serializable {
         this.gender = gender;
     }
 
-//    public List<Organizer> getOrganizers() {
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    //    public List<Organizer> getOrganizers() {
 //        return organizers;
 //    }
 //

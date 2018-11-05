@@ -13,11 +13,18 @@ public class Location implements Serializable {
     private String street;
     private int number;
     private String city;
+    private String province;
 
     @OneToMany(mappedBy = "location")
     List<Tournament> tournaments;
 
     public Location() {
+    }
+
+    public Location(String street, int number, String city) {
+        this.street = street;
+        this.number = number;
+        this.city = city;
     }
 
     public List<Tournament> getTournaments() {
@@ -58,5 +65,13 @@ public class Location implements Serializable {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
     }
 }

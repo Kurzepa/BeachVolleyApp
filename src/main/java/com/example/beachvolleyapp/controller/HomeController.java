@@ -1,5 +1,6 @@
 package com.example.beachvolleyapp.controller;
 
+import com.example.beachvolleyapp.model.Tournament;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

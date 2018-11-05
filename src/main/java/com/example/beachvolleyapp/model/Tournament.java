@@ -1,9 +1,12 @@
 package com.example.beachvolleyapp.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -13,11 +16,16 @@ public class Tournament implements Serializable {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private LocalDate date;
-    private LocalTime time;
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date date;
+    @Temporal(TemporalType.TIME)
+    @DateTimeFormat(pattern = "HH:mm")
+    private Date time;
     private String category;
     private int sitesNumber;
     private int fee;
+    private String description;
 
     /*
     @ManyToOne
@@ -40,16 +48,19 @@ public class Tournament implements Serializable {
     List<TeamInTournament> teamInTournaments;
 
 
+
+
     public Tournament() {
     }
 
-    public Tournament(String name, String category, int sitesNumber, int fee) {
+    public Tournament(String name, Date date, Date time, String category, int sitesNumber, int fee, Location location) {
         this.name = name;
-        //this.date = date;
-        //this.time = time;
+        this.date = date;
+        this.time = time;
         this.category = category;
         this.sitesNumber = sitesNumber;
         this.fee = fee;
+        this.location = location;
     }
 
     public Location getLocation() {
@@ -59,14 +70,6 @@ public class Tournament implements Serializable {
     public void setLocation(Location location) {
         this.location = location;
     }
-
-//    public Organizer getOrganizer() {
-//        return organizer;
-//    }
-//
-//    public void setOrganizer(Organizer organizer) {
-//        this.organizer = organizer;
-//    }
 
     public Long getId() {
         return id;
@@ -84,19 +87,19 @@ public class Tournament implements Serializable {
         this.name = name;
     }
 
-    public LocalDate getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
-    public LocalTime getTime() {
+    public Date getTime() {
         return time;
     }
 
-    public void setTime(LocalTime time) {
+    public void setTime(Date time) {
         this.time = time;
     }
 
@@ -147,5 +150,13 @@ public class Tournament implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

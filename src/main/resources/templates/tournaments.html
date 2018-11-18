@@ -10,12 +10,10 @@
 <body class="bg-secondary" >
 <header>
     <div class="p-3 mb-2 bg-dark text-white text-right">
-        <button type="button" class="btn btn-outline-warning">Zajerestruj się</button>
-        <button type="button" class="btn btn-warning">ZALOGUJ</button>
     </div>
 </header>
-<nav class="navbar navbar-expand-lg navbar-light bg-light text-warning">
-    <a class="navbar-brand" href="#" th:href="@{/}">Strona główna</a>
+<nav class="navbar navbar-expand-lg navbar-light bg-dark text-warning">
+    <a class="navbar-brand text-warning" href="#" th:href="@{/}">STRONA GŁÓWNA</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -23,33 +21,41 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#" th:href="@{/tournaments}">Turnieje</a>
+                <a class="nav-link text-secondary" href="#" th:href="@{/tournaments}">Turnieje</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#" th:href="@{/ranking}">Ranking</a>
+                <a class="nav-link text-secondary" href="#" th:href="@{/ranking}">Ranking</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#" th:href="@{/addTournament}">Dodaj turniej</a>
+                <a class="nav-link text-secondary" href="#" th:href="@{/addTournament}">Dodaj turniej</a>
+            </li>
+            <li>
+                <a class="nav-link text-secondary" href="#" th:href="@{/myTournaments}">Moje turnieje</a>
             </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Szukaj</button>
+        <form class="form-inline my-2 my-lg-0" th:if="not ${name}">
+            <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+             <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Szukaj</button> -->
+            <a class="btn btn-outline-warning mr-2"  href="#" th:href="@{/register}">Zajerestruj się</a>
+            <a class="btn btn-warning" href="#" th:href="@{/login}">ZALOGUJ</a>
+        </form>
+        <form class="form-inline my-2 my-lg-0" th:action="@{/logout}" method="post" th:if="${name}">
+            <button type="submit" class="btn btn-warning">WYLOGUJ</button>
         </form>
     </div>
 </nav>
 
 <div class="container">
     <br />
-    <table class="table table-striped table-bordered text-dark ">
+    <table class="table table-striped table-bordered text-dark">
         <thead>
-        <tr>
+        <tr class="bg-dark text-warning">
             <td>Nazwa turnieju</td><td>Kategoria</td><td>Data</td><td>Godzina</td><td>Liczba par</td><td>Miejscowość</td><td>Ulica</td>
         </tr>
         </thead>
         <tbody th:each="tournament : ${tournaments}">
         <tr>
-            <td th:text="${tournament.name}"></td>
+            <td  class="bg-warning" th:text="${tournament.name}"></td>
             <td th:text="${tournament.category}"></td>
             <td th:text="${tournament.date}"></td>
             <td th:text="${tournament.time}"></td>

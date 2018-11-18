@@ -7,39 +7,55 @@
 
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css}" />
 </head>
-<body>
-
+<body class="bg-secondary">
+<header>
+    <div class="p-3 mb-2 bg-dark text-white text-right">
+    </div>
+</header>
     <div class="container">
         <br />
-        <form class="offset-sm-2 col-sm-8 bg-warning rounded" action="#" method="post" th:action="@{/register}" th:object="${user} ">
+        <form class="offset-sm-2 offset-md-3 col-sm-8 col-md-6 bg-warning rounded" action="#" method="post" th:action="@{/register}" th:object="${user} ">
+            <h5 class="bg-dark text-warning text-center py-4  rounded">
+                <strong>REJESTRACJA</strong>
+            </h5>
             <div class="form-group">
                 <input type="text" class="form-control" placeholder="Login" th:field="*{login}"/>
-                <p class="text-warning" th:errors="*{login}"></p>
+                <p class="text-danger" th:errors="*{login}"></p>
             </div>
             <div class="form-group">
                 <input type="password" class="form-control" placeholder="Hasło" th:field="*{password}"/>
-                <p class="text-warning" th:errors="*{login}"></p>
+                <p class="text-danger" th:errors="*{password}"></p>
             </div>
             <div class="form-group">
                 <input type="text" class="form-control" placeholder="Imię" th:field="*{name}"/>
+                <p class="text-danger" th:errors="*{name}"></p>
             </div>
             <div class="form-group">
                 <input type="text" class="form-control" placeholder="Nazwisko" th:field="*{surname}"/>
+                <p class="text-danger" th:errors="*{surname}"></p>
             </div>
             <div class="form-group">
                 <input type="number" class="form-control" placeholder="Wiek" th:field="*{age}"/>
+                <p class="text-danger" th:errors="*{age}"></p>
             </div>
             <div class="form-group">
-                <input type="email" class="form-control" placeholder="E-mail" th:field="*{email}"/>
+                <input type="text" class="form-control" placeholder="E-mail" th:field="*{email}"/>
+                <p class="text-danger" th:errors="*{email}"></p>
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="Płeć" th:field="*{gender}"/>
+                <label class="text-dark ml-1">Płeć:</label>
+                <div class="form-group form-check-inline">
+                    <div class="bg-warning ">
+                        <input class="text-dark form-check-input col-auto" th:text="Kobieta" type="radio" th:field="*{gender}" th:value="female">
+                        <input class="text-dark form-check-input col-auto" th:text="Mężczyzna" type="radio" th:field="*{gender}" th:value="male">
+                    </div>
+                </div>
+                <p class="text-danger" th:errors="*{gender}"></p>
             </div>
 
             <div class="form-row form-group">
-                <button type="submit" class="col-sm-12 btn btn-outline-secondary text-dark">Zapisz</button>
+                <button type="submit" class="btn btn-outline-dark btn-block waves-effect mb-3">Zajerestruj</button>
             </div>
-
         </form>
 
     <script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>

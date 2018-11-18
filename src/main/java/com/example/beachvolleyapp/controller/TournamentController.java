@@ -6,6 +6,9 @@ import com.example.beachvolleyapp.repository.LocationRepository;
 import com.example.beachvolleyapp.repository.TournamentRepository;
 import com.example.beachvolleyapp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,6 +37,13 @@ public class TournamentController {
 
     @GetMapping("/tournaments")
     public String getToutnaments(Model model) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if(authentication != null && authentication.isAuthenticated() &&
+                !(SecurityContextHolder.getContext().getAuthentication() instanceof AnonymousAuthenticationToken) ) {
+            String name = authentication.getName();
+            model.addAttribute("name", name);
+        }
         List<Tournament> allTournaments = tournamentRepository.findAll();
         List<Location> allLocations = locationRepository.findAll();
         model.addAttribute("tournaments", allTournaments);
@@ -42,14 +52,27 @@ public class TournamentController {
         return "tournaments";
     }
 
+
     @GetMapping("/addTournament")
     public String addTournament(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if(authentication != null && authentication.isAuthenticated() &&
+                !(SecurityContextHolder.getContext().getAuthentication() instanceof AnonymousAuthenticationToken) ) {
+            String name = authentication.getName();
+            model.addAttribute("name", name);
+        }
         model.addAttribute("tournament", new Tournament(new Location()));
         return"add_tournament";
     }
 
     @GetMapping("/myTournaments")
     public String myTournament(Model model){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if(authentication != null && authentication.isAuthenticated() &&
+                !(SecurityContextHolder.getContext().getAuthentication() instanceof AnonymousAuthenticationToken) ) {
+            String name = authentication.getName();
+            model.addAttribute("name", name);
+        }
         List<Tournament> myTournaments = tournamentRepository.findAllByUser(userRepository.findById(1L).get());
         model.addAttribute("tournaments", myTournaments );
         return "my_tour";
@@ -57,6 +80,12 @@ public class TournamentController {
 
     @GetMapping("/tournament")
     public String Tournament (Model model){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if(authentication != null && authentication.isAuthenticated() &&
+                !(SecurityContextHolder.getContext().getAuthentication() instanceof AnonymousAuthenticationToken) ) {
+            String name = authentication.getName();
+            model.addAttribute("name", name);
+        }
         List<Tournament> Tournament = tournamentRepository.findFirstById(1L);
         model.addAttribute("tournament", Tournament);
         return "tournament";

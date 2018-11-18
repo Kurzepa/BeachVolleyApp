@@ -33,10 +33,11 @@ public class Starter implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         Stream.of(
-                new User("Kotek", passwordEncoder.encode("koteczek12"), "Kasia", "Nowak", 12, "female", 16),
-                new User("Siatkarz", passwordEncoder.encode("siatka"), "Wojciech", "Mielczarek", 15, "male", 23),
-                new User("Raz", passwordEncoder.encode("dwa"), "Aleksandra", "Kowalska", 23, "female", 120)
+                new User("Kotek", passwordEncoder.encode("koteczek12"), "Kasia", "Nowak", 12, "female", "kasia@gmail.com"),
+                new User("Siatkarz", passwordEncoder.encode("siatka3"), "Wojciech", "Mielczarek", 15, "male", "wojtek@gmail.com"),
+                new User("Raz", passwordEncoder.encode("razdwa3"), "Aleksandra", "Kowalska", 23, "female", "ola@gmail.com")
         ).forEach(userRepository::save);
+
         Stream.of(
                 //Location(String street, int number, String city)
                 new Location("Poniatowskiego",12,"Oborniki"),

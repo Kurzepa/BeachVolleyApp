@@ -1,7 +1,11 @@
 package com.example.beachvolleyapp.model;
 
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.List;
 
@@ -11,14 +15,20 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotEmpty
+    @NotEmpty(message = "Login nie może być pusty!")
     private String login;
-    @NotEmpty
+    @NotEmpty(message = "Podaj hasło.")
     private String password;
+    @NotEmpty(message = "Podaj imię.")
     private String name;
+    @NotEmpty(message = "Podaj nazwisko.")
     private String surname;
-    private int age;
+    @Min(value = 3, message = "Minimalna wartość 3.")
+    private Integer age;
+    @NotEmpty(message = "Podaj płeć.")
     private String gender;
+    @NotEmpty(message = "Podaj email.")
+    @Email(message = "To nie jest adres email. Podaj poprawny adres.")
     private String email;
     private int points;
 
@@ -33,14 +43,14 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(String login, String password, String name, String surname, int age, String gender, int points) {
+    public User(@NotEmpty String login, @NotEmpty @Size(min = 6, max = 15) String password, @NotEmpty String name, @NotEmpty String surname, @Min(0) Integer age, @NotEmpty String gender, @NotEmpty @Email String email) {
         this.login = login;
         this.password = password;
         this.name = name;
         this.surname = surname;
         this.age = age;
         this.gender = gender;
-        this.points = points;
+        this.email = email;
     }
 
     public Long getId() {
@@ -83,11 +93,11 @@ public class User implements Serializable {
         this.surname = surname;
     }
 
-    public int getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 

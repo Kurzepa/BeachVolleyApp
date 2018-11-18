@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th = "http://www.thymeleaf.org">
 <head>
-    <title>Turniej</title>
+    <title>Zalogowany</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -9,10 +9,12 @@
 </head>
 <body style="background-color: gray">
 <header>
-    <div class="p-3 mb-2 bg-dark text-white text-right">
-        <button type="button" class="btn btn-outline-warning">Zajerestruj się</button>
-        <button type="button" class="btn btn-warning">ZALOGUJ</button>
-    </div>
+    <form action="logout" th:action="@{/logout}" method="post">
+        <div class="p-3 mb-2 bg-dark text-white text-right">
+            <!--<button type="button" class="btn btn-outline-warning">Zajerestruj się</button>-->
+            <button type="submit" class="btn btn-warning">WYLOGUJ</button>
+        </div>
+    </form>
 </header>
 <nav class="navbar navbar-expand-lg navbar-light bg-light text-warning">
     <a class="navbar-brand" href="#" th:href="@{/}">Strona główna</a>
@@ -31,6 +33,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="#" th:href="@{/addTournament}">Dodaj turniej</a>
             </li>
+            <li>
+                <a class="nav-link" href="#" th:href="@{/myTournaments}">Moje turnieje</a>
+            </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -38,13 +43,17 @@
         </form>
     </div>
 </nav>
-<div class="container">
-    <tbody th:each="tournament : ${tournament}">
-        <td class="text-center" th:text="${tournament.name}"></td>
-    </tbody>
-</div>
+
+<br />
+<h3 class="text-center text-warning">Jesteś zalogowany! :)</h3>
+
 <script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
 <script th:src="@{/webjars/popper.js/1.12.9/umd/popper.min.js}"></script>
 <script th:src="@{/webjars/bootstrap/4.1.3/js/bootstrap.min.js}"></script>
 </body>
 </html>
+
+
+
+
+

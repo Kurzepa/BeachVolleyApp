@@ -11,7 +11,7 @@ public class Location implements Serializable {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
     private String street;
-    private int number;
+    private Integer number;
     private String city;
     private String province;
 
@@ -21,7 +21,7 @@ public class Location implements Serializable {
     public Location() {
     }
 
-    public Location(String street, int number, String city) {
+    public Location(String street, Integer number, String city) {
         this.street = street;
         this.number = number;
         this.city = city;
@@ -51,11 +51,11 @@ public class Location implements Serializable {
         this.street = street;
     }
 
-    public int getNumber() {
+    public Integer getNumber() {
         return number;
     }
 
-    public void setNumber(int number) {
+    public void setNumber(Integer number) {
         this.number = number;
     }
 
@@ -73,5 +73,17 @@ public class Location implements Serializable {
 
     public void setProvince(String province) {
         this.province = province;
+    }
+
+    @Override
+    public String toString() {
+        return "Location{" +
+                "id=" + id +
+                ", street='" + street + '\'' +
+                ", number=" + number +
+                ", city='" + city + '\'' +
+                ", province='" + province + '\'' +
+                ", tournaments=" + tournaments +
+                '}';
     }
 }

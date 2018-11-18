@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html xmlns:th = "http://www.thymeleaf.org">
+<head>
+    <title>Home</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css}" />
+</head>
+<body>
+
+    <div class="container">
+        <br />
+        <form class="offset-sm-2 col-sm-8 bg-warning rounded" action="#" method="post" th:action="@{/register}" th:object="${user} ">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Login" th:field="*{login}"/>
+                <p class="text-warning" th:errors="*{login}"></p>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" placeholder="Hasło" th:field="*{password}"/>
+                <p class="text-warning" th:errors="*{login}"></p>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Imię" th:field="*{name}"/>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Nazwisko" th:field="*{surname}"/>
+            </div>
+            <div class="form-group">
+                <input type="number" class="form-control" placeholder="Wiek" th:field="*{age}"/>
+            </div>
+            <div class="form-group">
+                <input type="email" class="form-control" placeholder="E-mail" th:field="*{email}"/>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Płeć" th:field="*{gender}"/>
+            </div>
+
+            <div class="form-row form-group">
+                <button type="submit" class="col-sm-12 btn btn-outline-secondary text-dark">Zapisz</button>
+            </div>
+
+        </form>
+
+    <script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/1.12.9/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/4.1.3/js/bootstrap.min.js}"></script>
+</body>
+</html>

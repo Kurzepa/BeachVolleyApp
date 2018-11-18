@@ -13,4 +13,9 @@ public class HomeController {
 
         return "index";
     }
+
+    @GetMapping("/index_login")
+    public String zalogowany(Model model){
+        return "index_login";
+    }
 }

@@ -1,9 +1,7 @@
 package com.example.beachvolleyapp.model;
 
-import com.example.beachvolleyapp.model.Team;
-import com.example.beachvolleyapp.model.Tournament;
-
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.List;
 
@@ -13,13 +11,16 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotEmpty
     private String login;
+    @NotEmpty
     private String password;
     private String name;
     private String surname;
     private int age;
     private String gender;
     private String email;
+    private int points;
 
 
     @OneToMany(mappedBy = "user" )
@@ -32,13 +33,14 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(String login, String password, String name, String surname, int age, String gender) {
+    public User(String login, String password, String name, String surname, int age, String gender, int points) {
         this.login = login;
         this.password = password;
         this.name = name;
         this.surname = surname;
         this.age = age;
         this.gender = gender;
+        this.points = points;
     }
 
     public Long getId() {
@@ -104,13 +106,14 @@ public class User implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
-    //    public List<Organizer> getOrganizers() {
-//        return organizers;
-//    }
-//
-//    public void setOrganizers(List<Organizer> organizers) {
-//        this.organizers = organizers;
-//    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
 
     public List<Team> getTeams() {
         return teams;

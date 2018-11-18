@@ -9,6 +9,7 @@ import com.example.beachvolleyapp.repository.TournamentRepository;
 import com.example.beachvolleyapp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
@@ -26,10 +27,16 @@ public class Starter implements CommandLineRunner {
     @Autowired
     LocationRepository locationRepository;
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
     @Override
     public void run(String... args) throws Exception {
-        User user = new User("Kotek", "koteczek12", "Kasia", "Nowak", 12, "female");
-        userRepository.save(user);
+        Stream.of(
+                new User("Kotek", passwordEncoder.encode("koteczek12"), "Kasia", "Nowak", 12, "female", 16),
+                new User("Siatkarz", passwordEncoder.encode("siatka"), "Wojciech", "Mielczarek", 15, "male", 23),
+                new User("Raz", passwordEncoder.encode("dwa"), "Aleksandra", "Kowalska", 23, "female", 120)
+        ).forEach(userRepository::save);
         Stream.of(
                 //Location(String street, int number, String city)
                 new Location("Poniatowskiego",12,"Oborniki"),
@@ -41,13 +48,13 @@ public class Starter implements CommandLineRunner {
                  //Location(String street, int number, String city)
                  new Tournament("OMOS", new SimpleDateFormat("yyyy-MM-dd").parse("2018-06-18"),
                          new SimpleDateFormat("HH:mm").parse("10:00"),"Open", 10, 10,
-                         locationRepository.findById(1L).get()),
+                         locationRepository.findById(1L).get(), userRepository.findById(1L).get()),
                  new Tournament("Spartan",new SimpleDateFormat("yyyy-MM-dd").parse("2018-07-18"),
                          new SimpleDateFormat("HH:mm").parse("12:00"),"Open", 20, 10,
-                         locationRepository.findById(2L).get()),
+                         locationRepository.findById(2L).get(), userRepository.findById(2L).get()),
                  new Tournament("OMW",new SimpleDateFormat("yyyy-MM-dd").parse("2018-06-18"),
                          new SimpleDateFormat("HH:mm").parse("10:00"),"Open", 30, 10,
-                         locationRepository.findById(3L).get())
+                         locationRepository.findById(3L).get(), userRepository.findById(1L).get())
         ).forEach(tournamentRepository::save);
     }
 }

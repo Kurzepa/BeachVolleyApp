@@ -23,8 +23,8 @@ public class Tournament implements Serializable {
     @DateTimeFormat(pattern = "HH:mm")
     private Date time;
     private String category;
-    private int sitesNumber;
-    private int fee;
+    private Integer sitesNumber;
+    private Integer fee;
     private String description;
 
     /*
@@ -53,7 +53,11 @@ public class Tournament implements Serializable {
     public Tournament() {
     }
 
-    public Tournament(String name, Date date, Date time, String category, int sitesNumber, int fee, Location location) {
+    public Tournament(Location location){
+        this.location = location;
+    }
+
+    public Tournament(String name, Date date, Date time, String category, Integer sitesNumber, Integer fee, Location location, User user) {
         this.name = name;
         this.date = date;
         this.time = time;
@@ -61,6 +65,7 @@ public class Tournament implements Serializable {
         this.sitesNumber = sitesNumber;
         this.fee = fee;
         this.location = location;
+        this.user = user;
     }
 
     public Location getLocation() {
@@ -112,19 +117,19 @@ public class Tournament implements Serializable {
         this.category = category;
     }
 
-    public int getSitesNumber() {
+    public Integer getSitesNumber() {
         return sitesNumber;
     }
 
-    public void setSitesNumber(int sitesNumber) {
+    public void setSitesNumber(Integer sitesNumber) {
         this.sitesNumber = sitesNumber;
     }
 
-    public int getFee() {
+    public Integer getFee() {
         return fee;
     }
 
-    public void setFee(int fee) {
+    public void setFee(Integer fee) {
         this.fee = fee;
     }
 

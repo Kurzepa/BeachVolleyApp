@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th = "http://www.thymeleaf.org">
 <head>
-    <title>Turnieje</title>
+    <title>Home</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -10,8 +10,8 @@
 <body style="background-color: gray">
 <header>
     <div class="p-3 mb-2 bg-dark text-white text-right">
-        <button type="button" class="btn btn-outline-warning">Zajerestruj się</button>
-        <button type="button" class="btn btn-warning">ZALOGUJ</button>
+        <a class="btn btn-outline-warning"  href="#" th:href="@{/register}">Zajerestruj się</a>
+        <a class="btn btn-warning" href="#" th:href="@{/login}">ZALOGUJ</a>
     </div>
 </header>
 <nav class="navbar navbar-expand-lg navbar-light bg-light text-warning">
@@ -23,13 +23,13 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#" th:href="@{/tournament}">Turnieje</a>
+                <a class="nav-link" href="#" th:href="@{/tournaments}">Turnieje</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Ranking</a>
+                <a class="nav-link" href="#" th:href="@{/ranking}">Ranking</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link disabled" href="#">Dodaj turniej</a>
+                <a class="nav-link" href="#" th:href="@{/addTournament}">Dodaj turniej</a>
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">

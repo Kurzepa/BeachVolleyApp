@@ -1,8 +1,8 @@
 package com.example.beachvolleyapp.controller;
 
-import com.example.beachvolleyapp.model.Location;
-import com.example.beachvolleyapp.model.Tournament;
+import com.example.beachvolleyapp.model.*;
 import com.example.beachvolleyapp.repository.LocationRepository;
+import com.example.beachvolleyapp.repository.TeamRepository;
 import com.example.beachvolleyapp.repository.TournamentRepository;
 import com.example.beachvolleyapp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -26,6 +28,8 @@ public class TournamentController {
     LocationRepository locationRepository;
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    TeamRepository teamRepository;
 
     @Autowired
     public TournamentController(TournamentRepository tournamentRepository, LocationRepository locationRepository, UserRepository userRepository){
@@ -72,22 +76,26 @@ public class TournamentController {
                 !(SecurityContextHolder.getContext().getAuthentication() instanceof AnonymousAuthenticationToken) ) {
             String name = authentication.getName();
             model.addAttribute("name", name);
+
+            List<Tournament> myTournaments = tournamentRepository.findAllByUser(userRepository.findByLogin(name));
+            model.addAttribute("tournaments", myTournaments );
         }
-        List<Tournament> myTournaments = tournamentRepository.findAllByUser(userRepository.findById(1L).get());
-        model.addAttribute("tournaments", myTournaments );
+
         return "my_tour";
     }
 
     @GetMapping("/tournament")
-    public String Tournament (Model model){
+    public String Tournament (@RequestParam("id") Long id, Model model){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if(authentication != null && authentication.isAuthenticated() &&
                 !(SecurityContextHolder.getContext().getAuthentication() instanceof AnonymousAuthenticationToken) ) {
             String name = authentication.getName();
             model.addAttribute("name", name);
         }
-        List<Tournament> Tournament = tournamentRepository.findFirstById(1L);
-        model.addAttribute("tournament", Tournament);
+        Tournament tournament = tournamentRepository.findById(id).get();
+        model.addAttribute("size", tournament.getTeamInTournaments().size());
+        model.addAttribute("tournament", tournament);
+
         return "tournament";
     }
 
@@ -96,8 +104,30 @@ public class TournamentController {
 
         Long locationId = locationRepository.save(tournament.getLocation()).getId();
         tournament.setLocation(locationRepository.findById(locationId).get());
+        tournament.setUser(userRepository.findByLogin(SecurityContextHolder.getContext().getAuthentication().getName()));
         tournamentRepository.save(tournament);
-        return"redirect:/tournament";
+        return"redirect:/tournaments";
     }
+
+    @PostMapping("/addToTournament")
+    public String addToTournament(@ModelAttribute Tournament tournament, Model model){
+
+        ArrayList<Team> teams = new ArrayList<>();
+        // pobranie zalogowanego uzytkownika
+        User user = userRepository.findByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
+        // dodanie do listu zespołów, do ktorych nalezy zalogowany uzytkownik
+        for(Team team: teamRepository.findAll()){
+            if(team.getUsers().contains(user))
+                teams.add(team);
+        }
+
+        System.out.println(tournament.getId() + tournament.getName());
+
+        model.addAttribute("teams", teams);
+        model.addAttribute("tournament", tournament);
+
+        return"choose_team";
+    }
+
 
 }

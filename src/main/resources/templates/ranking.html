@@ -32,6 +32,9 @@
             <li>
                 <a class="nav-link text-secondary" href="#" th:href="@{/myTournaments}">Moje turnieje</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link text-secondary" href="#" th:href="@{/addTeam}">Dodaj drużynę</a>
+            </li>
         </ul>
         <form class="form-inline my-2 my-lg-0" th:if="not ${name}">
             <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -50,13 +53,14 @@
     <table class="table table-striped table-bordered text-dark">
         <thead>
             <tr class="bg-dark text-warning">
-                <td>Zawodnik</td> <td>Liczba punktów</td>
+                <td class="text-center">Miejsce</td> <td class="text-center">Zawodnik</td> <td class="text-center">Liczba punktów</td>
             </tr>
         </thead>
         <tbody th:each="user : ${users}">
         <tr>
-            <td class="bg-warning" th:text="${user.name + ' ' + user.surname}"></td>
-            <td th:text="${user.points}"></td>
+            <td class="bg-warning text-center" th:text="${userStat.index + 1}"></td>
+            <td class="text-center" th:text="${user.name + ' ' + user.surname}"></td>
+            <td class="text-center" th:text="${user.points}"></td>
         </tr>
         </tbody>
     </table>

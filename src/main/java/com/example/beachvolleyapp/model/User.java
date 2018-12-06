@@ -43,7 +43,7 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(@NotEmpty String login, @NotEmpty @Size(min = 6, max = 15) String password, @NotEmpty String name, @NotEmpty String surname, @Min(0) Integer age, @NotEmpty String gender, @NotEmpty @Email String email) {
+    public User(@NotEmpty String login, @NotEmpty @Size(min = 6, max = 15) String password, @NotEmpty String name, @NotEmpty String surname, @Min(0) Integer age, @NotEmpty String gender, @NotEmpty @Email String email, int points) {
         this.login = login;
         this.password = password;
         this.name = name;
@@ -51,6 +51,7 @@ public class User implements Serializable {
         this.age = age;
         this.gender = gender;
         this.email = email;
+        this.points = points;
     }
 
     public Long getId() {

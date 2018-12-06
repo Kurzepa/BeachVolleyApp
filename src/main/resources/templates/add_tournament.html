@@ -32,6 +32,9 @@
             <li class="nav-item">
                 <a class="nav-link text-secondary" href="#" th:href="@{/myTournament}">Moje turnieje</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link text-secondary" href="#" th:href="@{/addTeam}">Dodaj drużynę</a>
+            </li>
         </ul>
         <form class="form-inline my-2 my-lg-0" th:if="not ${name}">
             <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -45,25 +48,25 @@
     </div>
 </nav>
 
-<div class="container">
-    <br />
-    <form class="offset-sm-2 offset-md-3 col-sm-8 col-md-6 bg-warning rounded" action="#" method="post" th:action="@{/save}" th:object="${tournament} ">
-        <br />
-        <h5 class="bg-dark text-warning text-center py-4  rounded">
-            <strong>DODAJ TURNIEJ</strong>
-        </h5>
+<div class="card bg-dark offset-sm-3 col-sm-6 mt-2" >
+
+    <h5 class="card-header bg-warning text-dark text-center py-4">
+        <strong>DODAJ TURNIEJ</strong>
+    </h5>
+    <!--class="offset-sm-2 offset-md-3 col-sm-8 col-md-6 bg-dark rounded"-->
+    <form  action="#" method="post" th:action="@{/save}" th:object="${tournament} ">
         <div class="form-group">
                 <input type="text" class="form-control" placeholder="Nazwa turnieju" th:field="*{name}"/>
         </div>
 
         <div class="form-group">
-            <label class="text-dark ml-1">Kategoria:</label>
-                <div class="form-check-inline bg-warning">
-                    <div class="bg-warning ">
-                        <input class="text-dark form-check-input col-auto ml-1" th:text="Open" type="radio" th:field="*{category}" th:value="Open">
-                        <input class="text-dark form-check-input col-auto ml-1" th:text="Kobiety" type="radio" th:field="*{category}" th:value="Women">
-                        <input class="text-dark form-check-input col-auto ml-1" th:text="Mężczyźni" type="radio" th:field="*{category}" th:value="Men">
-                        <input class="text-dark form-check-input col-auto ml-1" th:text="Mixty" type="radio" th:field="*{category}" th:value="Mix">
+            <label class="text-warning ml-1">Kategoria:</label>
+                <div class="form-check-inline text-warning">
+                    <div >
+                        <input class="text-warning form-check-input col-auto ml-1" th:text="Open" type="radio" th:field="*{category}" th:value="Open">
+                        <input class="text-warning form-check-input col-auto ml-1" th:text="Kobiety" type="radio" th:field="*{category}" th:value="Women">
+                        <input class="text-warning form-check-input col-auto ml-1" th:text="Mężczyźni" type="radio" th:field="*{category}" th:value="Men">
+                        <input class="text-warning form-check-input col-auto ml-1" th:text="Mixty" type="radio" th:field="*{category}" th:value="Mix">
                     </div>
                 </div>
         </div>
@@ -96,7 +99,7 @@
         </div>
 
         <div class="form-row form-group">
-            <button type="submit" class="btn btn-outline-dark btn-block waves-effect mb-3">Zapisz</button>
+            <button type="submit" class="btn btn-outline-warning btn-block waves-effect mb-3">Zapisz</button>
         </div>
     </form>
 </div>

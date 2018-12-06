@@ -20,6 +20,11 @@ public class TeamInTournament {
     public TeamInTournament() {
     }
 
+    public TeamInTournament(Tournament tournament, Team team) {
+        this.tournament = tournament;
+        this.team = team;
+    }
+
     public Long getId() {
         return id;
     }

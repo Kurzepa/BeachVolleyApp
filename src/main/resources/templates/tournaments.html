@@ -32,6 +32,9 @@
             <li>
                 <a class="nav-link text-secondary" href="#" th:href="@{/myTournaments}">Moje turnieje</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link text-secondary" href="#" th:href="@{/addTeam}">Dodaj drużynę</a>
+            </li>
         </ul>
         <form class="form-inline my-2 my-lg-0" th:if="not ${name}">
             <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -50,7 +53,7 @@
     <table class="table table-striped table-bordered text-dark">
         <thead>
         <tr class="bg-dark text-warning">
-            <td>Nazwa turnieju</td><td>Kategoria</td><td>Data</td><td>Godzina</td><td>Liczba par</td><td>Miejscowość</td><td>Ulica</td>
+            <td>Nazwa turnieju</td><td>Kategoria</td><td>Data</td><td>Godzina</td><td>Liczba par</td><td>Miejscowość</td><td>Ulica</td><td></td>
         </tr>
         </thead>
         <tbody th:each="tournament : ${tournaments}">
@@ -62,6 +65,9 @@
             <td th:text="${tournament.sitesNumber}"></td>
             <td th:text="${tournament.location.city}"></td>
             <td th:text="${tournament.location.street + ' ' + tournament.location.number}"></td>
+            <td>
+                <a class="text-warning" th:href="${'/tournament?id='+tournament.id}">Zapisy</a>
+            </td>
 
         </tr>
         </tbody>

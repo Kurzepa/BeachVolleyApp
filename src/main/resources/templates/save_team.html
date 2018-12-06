@@ -1,15 +1,18 @@
 <!DOCTYPE HTML>
 <html xmlns:th = "http://www.thymeleaf.org">
 <head>
-    <title>Turnieje</title>
+    <title>Home</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css}" />
 </head>
-<body class="bg-secondary" >
+<body style="background-color: gray">
 <header>
     <div class="p-3 mb-2 bg-dark text-white text-right">
+        <!--
+        <a class="btn btn-outline-warning"  href="#" th:href="@{/register}">Zajerestruj się</a>
+        <a class="btn btn-warning" href="#" th:href="@{/login}">ZALOGUJ</a> -->
     </div>
 </header>
 <nav class="navbar navbar-expand-lg navbar-light bg-dark text-warning">
@@ -47,34 +50,33 @@
         </form>
     </div>
 </nav>
-<div class="container">
+<div class="card bg-dark offset-sm-3 col-sm-6 mt-2">
+    <form action="#" th:action="@{/saveTeam}" method="post" th:object="${team}">
 
-    <br />
-    <form th:object="${tournament}"
-          class="offset-sm-2 offset-md-3 col-sm-8 col-md-6 bg-secondary rounded" action="#" method="post" th:action="@{/addToTournament}">
-        <input type="hidden" th:field="${tournament.id}"  class="form-control" />
-        <div class="form-group" th:if="${size < tournament.sitesNumber}">
-            <button class="btn btn-outline-warning btn-block waves-effect mb-3" type="submit">Zapisz się</button>
+        <h5 class="card-header bg-warning text-dark text-center py-4">
+            <strong>Nazwa drużyny</strong>
+        </h5>
+        <div class="form-group" th:each="user : ${team.users}">
+            <input type="hidden" th:field="*{users[__${userStat.index}__]}" placeholder="Powtorzenia" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Nazwa drużyny"  th:field="*{name}"/>
+            <p class="text-danger" th:errors="*{name}"></p>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-outline-warning btn-block waves-effect mb-3">Zapisz</button>
         </div>
     </form>
-    <br />
-    <table class="table table-striped table-bordered text-dark">
-        <thead>
-        <tr class="bg-dark text-warning">
-            <td>Drużyna</td> <td>Zawodnik 1</td> <td>Zawodnik 2</td>
-        </tr>
-        </thead>
-        <tbody th:each="team : ${tournament.teamInTournaments}">
-        <tr>
-            <td class="bg-warning text-center" th:text="${team.team.name}"></td>
-            <td th:each="user: ${team.team.users}" th:text="${user.name + ' ' + user.surname}"></td>
-        </tr>
-        </tbody>
-    </table>
-
 </div>
 <script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
 <script th:src="@{/webjars/popper.js/1.12.9/umd/popper.min.js}"></script>
 <script th:src="@{/webjars/bootstrap/4.1.3/js/bootstrap.min.js}"></script>
 </body>
 </html>
+
+
+
+
+

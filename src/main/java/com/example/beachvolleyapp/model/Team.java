@@ -1,6 +1,7 @@
 package com.example.beachvolleyapp.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.List;
 
@@ -10,6 +11,7 @@ public class Team implements Serializable {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotEmpty
     private String name;
 
     @OneToMany(mappedBy = "team" )
@@ -21,7 +23,17 @@ public class Team implements Serializable {
     @ManyToMany
     private List<User> users;
 
+
     public Team() {
+    }
+
+    public Team(String name, List<User> users) {
+        this.name = name;
+        this.users = users;
+    }
+
+    public Team(List<User> users) {
+        this.users = users;
     }
 
     public Long getId() {

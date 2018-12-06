@@ -8,6 +8,9 @@ import com.example.beachvolleyapp.repository.TeamInTournamentRepository;
 import com.example.beachvolleyapp.repository.TeamRepository;
 import com.example.beachvolleyapp.repository.TournamentRepository;
 import com.example.beachvolleyapp.repository.UserRepository;
+import com.example.beachvolleyapp.service.TeamInTournamentServices;
+import com.example.beachvolleyapp.service.TeamServices;
+import com.example.beachvolleyapp.service.TournamentServices;
 import com.example.beachvolleyapp.service.UserService;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,13 +36,13 @@ public class TeamController {
     UserService userService;
 
     @Autowired
-    TeamRepository teamRepository;
+    TeamServices teamServices;
 
     @Autowired
-    TournamentRepository tournamentRepository;
+    TournamentServices tournamentServices;
 
     @Autowired
-    TeamInTournamentRepository teamInTournamentRepository;
+    TeamInTournamentServices teamInTournamentServices;
 
     @GetMapping("/addTeam")
     public String addTeam(Model model) {
@@ -76,10 +79,10 @@ public class TeamController {
     @GetMapping("/saveMyTeam")
     public String saveMyTeam(@RequestParam("teamId") Long teamId, @RequestParam("tourId") Long tournamentId, Model model) {
 
-        Team team = teamRepository.findById(teamId).get();
-        Tournament tournament = tournamentRepository.findById(tournamentId).get();
+        Team team = teamServices.findById(teamId);
+        Tournament tournament = tournamentServices.findById(tournamentId);
 
-        teamInTournamentRepository.save(new TeamInTournament(tournament, team));
+        teamInTournamentServices.save(new TeamInTournament(tournament, team));
 
         return"redirect:/tournament?id=" + tournamentId;
     }
@@ -97,7 +100,7 @@ public class TeamController {
             return "save_team";
         }
 
-        teamRepository.save(team);
+        teamServices.save(team);
         return "redirect:/";
     }
 }

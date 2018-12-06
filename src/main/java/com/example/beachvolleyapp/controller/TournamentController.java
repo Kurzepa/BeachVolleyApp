@@ -5,6 +5,10 @@ import com.example.beachvolleyapp.repository.LocationRepository;
 import com.example.beachvolleyapp.repository.TeamRepository;
 import com.example.beachvolleyapp.repository.TournamentRepository;
 import com.example.beachvolleyapp.repository.UserRepository;
+import com.example.beachvolleyapp.service.LocationServices;
+import com.example.beachvolleyapp.service.TeamServices;
+import com.example.beachvolleyapp.service.TournamentServices;
+import com.example.beachvolleyapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -23,19 +27,19 @@ import java.util.List;
 public class TournamentController {
 
     @Autowired
-    TournamentRepository tournamentRepository;
+    TournamentServices tournamentServices;
     @Autowired
-    LocationRepository locationRepository;
+    LocationServices locationServices;
     @Autowired
-    UserRepository userRepository;
+    UserService userService;
     @Autowired
-    TeamRepository teamRepository;
+    TeamServices teamServices;
 
     @Autowired
-    public TournamentController(TournamentRepository tournamentRepository, LocationRepository locationRepository, UserRepository userRepository){
-        this.tournamentRepository = tournamentRepository;
-        this.locationRepository = locationRepository;
-        this.userRepository = userRepository;
+    public TournamentController(TournamentServices tournamentServices, LocationServices locationServices, UserService userService){
+        this.tournamentServices = tournamentServices;
+        this.locationServices = locationServices;
+        this.userService = userService;
     }
 
 
@@ -48,8 +52,8 @@ public class TournamentController {
             String name = authentication.getName();
             model.addAttribute("name", name);
         }
-        List<Tournament> allTournaments = tournamentRepository.findAll();
-        List<Location> allLocations = locationRepository.findAll();
+        List<Tournament> allTournaments = tournamentServices.findAll();
+        List<Location> allLocations = locationServices.findAll();
         model.addAttribute("tournaments", allTournaments);
         model.addAttribute("locations", allLocations);
 
@@ -77,7 +81,7 @@ public class TournamentController {
             String name = authentication.getName();
             model.addAttribute("name", name);
 
-            List<Tournament> myTournaments = tournamentRepository.findAllByUser(userRepository.findByLogin(name));
+            List<Tournament> myTournaments = tournamentServices.findAllByUser(userService.findByLogin(name));
             model.addAttribute("tournaments", myTournaments );
         }
 
@@ -92,7 +96,7 @@ public class TournamentController {
             String name = authentication.getName();
             model.addAttribute("name", name);
         }
-        Tournament tournament = tournamentRepository.findById(id).get();
+        Tournament tournament = tournamentServices.findById(id);
         model.addAttribute("size", tournament.getTeamInTournaments().size());
         model.addAttribute("tournament", tournament);
 
@@ -102,10 +106,10 @@ public class TournamentController {
     @PostMapping("/save")
     public String saveTournament(@ModelAttribute Tournament tournament){
 
-        Long locationId = locationRepository.save(tournament.getLocation()).getId();
-        tournament.setLocation(locationRepository.findById(locationId).get());
-        tournament.setUser(userRepository.findByLogin(SecurityContextHolder.getContext().getAuthentication().getName()));
-        tournamentRepository.save(tournament);
+        Long locationId = locationServices.save(tournament.getLocation()).getId();
+        tournament.setLocation(locationServices.findById(locationId));
+        tournament.setUser(userService.findByLogin(SecurityContextHolder.getContext().getAuthentication().getName()));
+        tournamentServices.save(tournament);
         return"redirect:/tournaments";
     }
 
@@ -114,9 +118,9 @@ public class TournamentController {
 
         ArrayList<Team> teams = new ArrayList<>();
         // pobranie zalogowanego uzytkownika
-        User user = userRepository.findByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
+        User user = userService.findByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
         // dodanie do listu zespołów, do ktorych nalezy zalogowany uzytkownik
-        for(Team team: teamRepository.findAll()){
+        for(Team team: teamServices.findAll()){
             if(team.getUsers().contains(user))
                 teams.add(team);
         }

@@ -22,9 +22,6 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    UserRepository userRepository;
-
-    @Autowired
     UserService userService;
 
     PasswordEncoder passwordEncoder;
@@ -42,7 +39,7 @@ public class UserController {
             String name = authentication.getName();
             model.addAttribute("name", name);
         }
-        List<User> allUsers = userRepository.findAllByOrderByPointsDesc();
+        List<User> allUsers = userService.findAllByOrderByPointsDesc();
         model.addAttribute("users", allUsers);
 
         return"ranking";

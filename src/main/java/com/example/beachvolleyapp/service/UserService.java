@@ -29,4 +29,8 @@ public class UserService {
     public User findByLogin(String name) {
         return userRepository.findByLogin(name);
     }
+
+    public List<User> findAllByOrderByPointsDesc() {
+        return userRepository.findAllByOrderByPointsDesc();
+    }
 }

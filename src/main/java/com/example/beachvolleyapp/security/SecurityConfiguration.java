@@ -26,6 +26,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/tournaments").permitAll()
                 .antMatchers("/webjars/**").permitAll()
                 .antMatchers("/ranking").permitAll()
+                .antMatchers("/api/users").permitAll()
+                .antMatchers("/api/teams").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

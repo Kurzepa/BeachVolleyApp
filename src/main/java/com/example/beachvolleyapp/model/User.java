@@ -1,5 +1,7 @@
 package com.example.beachvolleyapp.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.validation.constraints.Email;
@@ -34,9 +36,11 @@ public class User implements Serializable {
 
 
     @OneToMany(mappedBy = "user" )
+    @JsonBackReference
     private List<Tournament> tournaments;
 
     @ManyToMany(mappedBy = "users")
+    @JsonBackReference
     private List<Team> teams;
 
 

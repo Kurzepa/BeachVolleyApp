@@ -42,7 +42,7 @@ public class UserController {
         List<User> allUsers = userService.findAllByOrderByPointsDesc();
         model.addAttribute("users", allUsers);
 
-        return"ranking";
+        return "ranking";
     }
 
     @GetMapping("/register")

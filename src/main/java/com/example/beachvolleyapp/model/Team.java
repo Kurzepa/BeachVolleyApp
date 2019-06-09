@@ -1,5 +1,9 @@
 package com.example.beachvolleyapp.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
@@ -15,12 +19,16 @@ public class Team implements Serializable {
     private String name;
 
     @OneToMany(mappedBy = "team" )
+    @JsonBackReference
     List<Score> scores;
 
     @OneToMany(mappedBy = "team")
+    @JsonBackReference
     List<TeamInTournament> teamInTournaments;
 
     @ManyToMany
+    @JsonManagedReference
+    @JsonIgnore
     private List<User> users;
 
 

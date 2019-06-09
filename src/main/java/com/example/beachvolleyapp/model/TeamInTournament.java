@@ -1,5 +1,8 @@
 package com.example.beachvolleyapp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -15,6 +18,8 @@ public class TeamInTournament {
 
     @ManyToOne
     @JoinColumn(name = "team_id")
+    @JsonManagedReference
+    @JsonIgnore
     private Team team;
 
     public TeamInTournament() {

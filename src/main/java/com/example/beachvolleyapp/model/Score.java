@@ -1,5 +1,8 @@
 package com.example.beachvolleyapp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -18,6 +21,8 @@ public class Score implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "team_id")
+    @JsonManagedReference
+    @JsonIgnore
     private Team team;
 
     public Score() {

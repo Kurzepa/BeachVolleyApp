@@ -1,5 +1,7 @@
 package com.example.beachvolleyapp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -35,6 +37,8 @@ public class Tournament implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonManagedReference
+    @JsonIgnore
     private User user;
 
     @ManyToOne

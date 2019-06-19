@@ -35,10 +35,10 @@ public class User implements Serializable {
     private int points;
 
 
-    @OneToMany(mappedBy = "user" )
-    @JsonBackReference
-    private List<Tournament> tournaments;
-
+//    @OneToMany(mappedBy = "user" )
+//    @JsonBackReference
+//    private List<Tournament> tournaments;
+//
     @ManyToMany(mappedBy = "users")
     @JsonBackReference
     private List<Team> teams;
@@ -130,19 +130,19 @@ public class User implements Serializable {
         this.points = points;
     }
 
-    public List<Team> getTeams() {
-        return teams;
-    }
-
-    public void setTeams(List<Team> teams) {
-        this.teams = teams;
-    }
-
-    public List<Tournament> getTournaments() {
-        return tournaments;
-    }
-
-    public void setTournaments(List<Tournament> tournaments) {
-        this.tournaments = tournaments;
-    }
+//    public List<Team> getTeams() {
+//        return teams;
+//    }
+//
+//    public void setTeams(List<Team> teams) {
+//        this.teams = teams;
+//    }
+//
+//    public List<Tournament> getTournaments() {
+//        return tournaments;
+//    }
+//
+//    public void setTournaments(List<Tournament> tournaments) {
+//        this.tournaments = tournaments;
+//    }
 }

@@ -14,6 +14,8 @@ public class TeamInTournament {
 
     @ManyToOne
     @JoinColumn(name = "tournament_id")
+    //@JsonManagedReference
+    @JsonIgnore
     private Tournament tournament;
 
     @ManyToOne

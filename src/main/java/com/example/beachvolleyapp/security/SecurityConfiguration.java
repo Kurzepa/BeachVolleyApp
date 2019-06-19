@@ -18,6 +18,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.cors().and().csrf().disable();
+        /*
         http
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
@@ -27,7 +29,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/webjars/**").permitAll()
                 .antMatchers("/ranking").permitAll()
                 .antMatchers("/api/users").permitAll()
-                .antMatchers("/api/teams").permitAll()
+                .antMatchers("/api/teams/all").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -37,6 +39,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logout()
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/");
+        */
 
     }
 }

@@ -18,13 +18,13 @@ public class Team implements Serializable {
     @NotEmpty
     private String name;
 
-    @OneToMany(mappedBy = "team" )
-    @JsonBackReference
-    List<Score> scores;
-
-    @OneToMany(mappedBy = "team")
-    @JsonBackReference
-    List<TeamInTournament> teamInTournaments;
+//    @OneToMany(mappedBy = "team" )
+//    @JsonBackReference
+//    List<Score> scores;
+//
+//    @OneToMany(mappedBy = "team")
+//    @JsonBackReference
+//    List<TeamInTournament> teamInTournaments;
 
     @ManyToMany
     @JsonManagedReference
@@ -60,21 +60,21 @@ public class Team implements Serializable {
         this.name = name;
     }
 
-    public List<Score> getScores() {
-        return scores;
-    }
-
-    public void setScores(List<Score> scores) {
-        this.scores = scores;
-    }
-
-    public List<TeamInTournament> getTeamInTournaments() {
-        return teamInTournaments;
-    }
-
-    public void setTeamInTournaments(List<TeamInTournament> teamInTournaments) {
-        this.teamInTournaments = teamInTournaments;
-    }
+//    public List<Score> getScores() {
+//        return scores;
+//    }
+//
+//    public void setScores(List<Score> scores) {
+//        this.scores = scores;
+//    }
+//
+//    public List<TeamInTournament> getTeamInTournaments() {
+//        return teamInTournaments;
+//    }
+//
+//    public void setTeamInTournaments(List<TeamInTournament> teamInTournaments) {
+//        this.teamInTournaments = teamInTournaments;
+//    }
 
     public List<User> getUsers() {
         return users;

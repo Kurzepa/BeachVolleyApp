@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.temporal.TemporalAmount;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class LocationServices {
@@ -24,7 +25,7 @@ public class LocationServices {
         return locationRepository.save(location);
     }
 
-    public Location findById(Long locationId) {
-        return locationRepository.findById(locationId).get();
+    public Optional<Location> findById(Long locationId) {
+        return locationRepository.findById(locationId);
     }
 }

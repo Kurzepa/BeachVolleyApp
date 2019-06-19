@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TournamentServices {
@@ -15,8 +16,8 @@ public class TournamentServices {
     @Autowired
     TournamentRepository tournamentRepository;
 
-    public Tournament findById(Long tournamentId) {
-        return tournamentRepository.findById(tournamentId).get();
+    public Optional<Tournament> findById(Long tournamentId) {
+        return tournamentRepository.findById(tournamentId);
     }
 
     public List<Tournament> findAll() {
@@ -27,7 +28,7 @@ public class TournamentServices {
         return tournamentRepository.findAllByUser(byLogin);
     }
 
-    public void save(Tournament tournament) {
-        tournamentRepository.save(tournament);
+    public Tournament save(Tournament tournament) {
+        return tournamentRepository.save(tournament);
     }
 }

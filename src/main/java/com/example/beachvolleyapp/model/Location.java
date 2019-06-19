@@ -1,5 +1,7 @@
 package com.example.beachvolleyapp.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -16,6 +18,7 @@ public class Location implements Serializable {
     private String province;
 
     @OneToMany(mappedBy = "location")
+    @JsonBackReference
     List<Tournament> tournaments;
 
     public Location() {

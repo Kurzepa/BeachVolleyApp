@@ -1,5 +1,7 @@
 package com.example.beachvolleyapp.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -23,13 +25,14 @@ public class Tournament implements Serializable {
     private Date date;
     @Temporal(TemporalType.TIME)
     @DateTimeFormat(pattern = "HH:mm")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
     private Date time;
     private String category;
     private Integer sitesNumber;
     private Integer fee;
     private String description;
 
-    /*
+    /* Ola
     @ManyToOne
     @JoinColumn(name = "organizer_id")
     private Organizer organizer;
@@ -43,16 +46,17 @@ public class Tournament implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "location_id")
+    @JsonManagedReference
+    @JsonIgnore
     private Location location;
 
     @OneToMany(mappedBy = "tournament" )
+    //@JsonBackReference
     List<Score> scores;
 
     @OneToMany(mappedBy = "tournament")
+    //@JsonBackReference
     List<TeamInTournament> teamInTournaments;
-
-
-
 
     public Tournament() {
     }
@@ -78,7 +82,7 @@ public class Tournament implements Serializable {
 
     public void setLocation(Location location) {
         this.location = location;
-    }
+}
 
     public Long getId() {
         return id;

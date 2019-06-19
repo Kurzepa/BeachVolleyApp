@@ -17,6 +17,8 @@ public class Score implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "tournament_id")
+    //@JsonManagedReference
+    @JsonIgnore
     private Tournament tournament;
 
     @ManyToOne
